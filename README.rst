@@ -16,6 +16,20 @@ And add it as a compiler to pipeline in your django `settings.py`::
         # ...
     )
 
+**Important:** give your entry-point file a `.browserify.js` extension::
+
+    PIPELINE = {
+        # ...
+        'javascript':{
+            'browserify': {
+                'source_filenames' : (
+                    'js/entry-point.browserify.js',
+                ),
+                'output_filename': 'js/entry-point.js',
+            },
+        }
+    }
+
 To add source maps during development (or any other browserify args)::
 
     if DEBUG:
@@ -46,19 +60,6 @@ To use a local install of the browserify command line utility (or if it is not i
     PIPELINE['BROWSERIFY_BINARY'] = os.path.join(REPO_ROOT, "node_modules/.bin", "browserify"),
 
 
-**Important:** give your entry-point file a `.browserify.js` extension::
-
-    PIPELINE = {
-        # ...
-        'javascript':{
-            'browserify': {
-                'source_filenames' : (
-                    'js/entry-point.browserify.js',
-                ),
-                'output_filename': 'js/entry-point.js',
-            },
-        }
-    }
 
 To suggest a feature or report a bug:
 https://github.com/j0hnsmith/django-pipeline-browserify/issues
