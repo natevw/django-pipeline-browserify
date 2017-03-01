@@ -86,6 +86,10 @@ class BrowserifyCompiler(SubProcessCompiler):
         if super(BrowserifyCompiler, self).is_outdated(infile, outfile):
             return True
         
+        pipeline_settings = getattr(settings, 'PIPELINE', {})
+        if pipeline_settings.get('BROWSERIFY_SHALLOW_RECOMPILES', False):
+            return False
+        
         # Otherwise we need to see what dependencies there are now, and if they're modified.
         tool, args, env = self._get_cmd_parts()
         cmd = [tool] + args + ['--list', infile]

@@ -59,6 +59,9 @@ To use a local install of the browserify command line utility (or if it is not i
     # ...or perhaps something like this:
     PIPELINE['BROWSERIFY_BINARY'] = os.path.join(REPO_ROOT, "node_modules/.bin", "browserify"),
 
+By default a full check of your entry point **and its dependencies** is performed to see if the output is stale. This produces the most correct behavior, but with a large JavaScript codebase can cause very slow page refreshes — even when nothing has changed! To use only the main entry point's modification time when determining if recompilation is needed, set:
+
+    PIPELINE['BROWSERIFY_SHALLOW_RECOMPILES'] = True
 
 
 To suggest a feature or report a bug:
